@@ -4,14 +4,19 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import com.example.bookshelfapp.ui.BookShelfApp
 import com.example.bookshelfapp.ui.theme.BookShelfAppTheme
+/**
+ *
+ * Espera-se que o app faça o seguinte:
+ *
+ * - Faça uma solicitação para a API Google Books usando a Retrofit.
+ * - Analise a resposta usando o Gson.
+ * - Mostre imagens salvas dos livros de forma assíncrona em conjunto com os títulos em uma grade vertical.
+ * - Use um repositório para implementar as práticas recomendadas, separando a interface e a camada de dados.
+ * - Crie testes de código que exigem o serviço de rede usando a injeção de dependência.
+ *
+ */
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -19,29 +24,8 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             BookShelfAppTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                BookShelfApp()
             }
         }
-    }
-}
-
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    BookShelfAppTheme {
-        Greeting("Android")
     }
 }
