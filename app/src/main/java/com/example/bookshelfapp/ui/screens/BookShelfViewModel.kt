@@ -11,12 +11,12 @@ import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.bookshelfapp.BookShelfApplication
 import com.example.bookshelfapp.data.BookShelfRepository
-import com.example.bookshelfapp.network.BookResponse
+import com.example.bookshelfapp.network.BookItem
 import kotlinx.coroutines.launch
 import java.io.IOException
 
 interface BookUiState {
-    data class Success(var volumeBooks: List<BookResponse>) : BookUiState
+    data class Success(var volumeBooks: List<BookItem>) : BookUiState
     data object Loading : BookUiState
     data object Error : BookUiState
 }

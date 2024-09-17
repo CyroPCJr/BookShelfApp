@@ -30,7 +30,8 @@ fun BookShelfApp() {
         Surface(
             modifier = Modifier.fillMaxSize()
         ) {
-            val bookShelfViewModel: BookShelfViewModel = viewModel(factory = BookShelfViewModel.Factory)
+            val bookShelfViewModel: BookShelfViewModel =
+                viewModel(factory = BookShelfViewModel.Factory)
             HomeScreen(
                 bookUiState = bookShelfViewModel.bookUiState,
                 retryAction = bookShelfViewModel::getVolumeBook,

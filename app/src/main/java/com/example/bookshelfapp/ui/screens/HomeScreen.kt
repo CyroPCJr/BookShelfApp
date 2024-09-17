@@ -2,9 +2,10 @@ package com.example.bookshelfapp.ui.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -13,6 +14,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -23,10 +25,10 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import coil.compose.AsyncImage
+import coil.compose.SubcomposeAsyncImage
 import coil.request.ImageRequest
 import com.example.bookshelfapp.R
-import com.example.bookshelfapp.network.BookResponse
+import com.example.bookshelfapp.network.BookItem
 
 @Composable
 fun HomeScreen(
@@ -69,7 +71,7 @@ fun ErrorScreen(retryAction: () -> Unit, modifier: Modifier) {
 
 @Composable
 fun BookShelfGridScreen(
-    bookShelfList: List<BookResponse>,
+    bookShelfList: List<BookItem>,
     contentPadding: PaddingValues,
     modifier: Modifier,
 ) {
@@ -78,7 +80,7 @@ fun BookShelfGridScreen(
         modifier = modifier.padding(horizontal = 4.dp),
         contentPadding = contentPadding,
     ) {
-        items(items = bookShelfList, key = { item -> item.kind }) { book ->
+        items(items = bookShelfList, key = { item -> item.id }) { book ->
             BookCardGrid(book)
         }
     }
@@ -86,29 +88,39 @@ fun BookShelfGridScreen(
 
 
 @Composable
-fun BookCardGrid(bookResponse: BookResponse, modifier: Modifier = Modifier) {
+fun BookCardGrid(bookResponse: BookItem, modifier: Modifier = Modifier) {
     Card(
         modifier = modifier,
         shape = MaterialTheme.shapes.medium,
         elevation = CardDefaults.cardElevation(defaultElevation = 8.dp)
     ) {
-        AsyncImage(
-            model = ImageRequest.Builder(context = LocalContext.current).data(bookResponse.items[0])
+        SubcomposeAsyncImage(
+            model = ImageRequest.Builder(context = LocalContext.current)
+                .data(bookResponse.volumeInfo.imageLinks?.httpsThumbnail)
                 .crossfade(true).build(),
-            error = painterResource(R.drawable.ic_broken_image),
-            placeholder = painterResource(R.drawable.ic_loading),
-            contentDescription = stringResource(R.string.app_name),
-            contentScale = ContentScale.Crop,
-            modifier = Modifier.fillMaxWidth()
+            contentDescription = null,
+            loading = { CircularProgressIndicator() },
+            contentScale = ContentScale.Fit,
+            modifier = Modifier.size(300.dp)
         )
+//        AsyncImage(
+//            model = ImageRequest.Builder(context = LocalContext.current).data(bookResponse.volumeInfo.imageLinks?.httpsThumbnail)
+//                .crossfade(true).build(),
+//            error = painterResource(R.drawable.ic_broken_image),
+//            placeholder = painterResource(R.drawable.ic_loading),
+//            contentDescription = stringResource(R.string.app_name),
+//            contentScale = ContentScale.Crop,
+//            modifier = Modifier.fillMaxWidth()
+//        )
     }
 }
 
 @Composable
 fun LoadingScreen(modifier: Modifier) {
-    Image(
-        modifier = modifier.size(200.dp),
-        painter = painterResource(R.drawable.ic_loading),
-        contentDescription = stringResource(R.string.loading)
-    )
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = modifier.fillMaxSize()
+    ) {
+        CircularProgressIndicator()
+    }
 }

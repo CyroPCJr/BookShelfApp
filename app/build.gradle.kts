@@ -65,6 +65,7 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.retrofit2)
     implementation(libs.retrofit2.serialization.converter)
+    implementation(libs.retrofit2.serialization.converter.gson)
     implementation(libs.okhttp)
     implementation(libs.kotlin.serialization.json)
     testImplementation(libs.junit)
