@@ -69,10 +69,12 @@ dependencies {
     implementation(libs.okhttp)
     implementation(libs.kotlin.serialization.json)
     testImplementation(libs.junit)
+    testImplementation(libs.kotlin.coroutine.test)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(composeBom)
     androidTestImplementation(libs.androidx.ui.test.junit4)
+    androidTestImplementation(libs.kotlin.coroutine.test)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 }

@@ -4,7 +4,7 @@ import android.app.Application
 import com.example.bookshelfapp.data.AppContainer
 import com.example.bookshelfapp.data.DefaultContainer
 
-class BookShelfApplication: Application() {
+class BookShelfApplication : Application() {
 
     lateinit var container: AppContainer
     override fun onCreate() {

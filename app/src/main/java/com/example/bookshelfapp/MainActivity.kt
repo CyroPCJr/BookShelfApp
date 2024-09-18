@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.example.bookshelfapp.ui.BookShelfApp
 import com.example.bookshelfapp.ui.theme.BookShelfAppTheme
+
 /**
  *
  * Espera-se que o app faça o seguinte:
